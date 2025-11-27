@@ -1,3 +1,78 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+/* Container for episodes */
 #root {
-  color: red;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  align-items: stretch;
+  justify-items: center;
+}
+
+/* Episode Card Styling */
+.episode {
+  background: white;
+  width: 100%;
+  max-width: 350px;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Title and Episode Code */
+.episode h2 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+}
+.episode h3 {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+/* Image Styling */
+.episode img {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+  object-fit: cover;
+}
+
+/* Summary */
+.episode div {
+  font-size: 0.85rem;
+  color: #333;
+  text-align: justify;
+}
+
+/* Footer styling */
+footer {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 10px;
+  font-size: 0.85rem;
+  color: #555;
+}
+footer a {
+  color: #0077cc;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
 }
