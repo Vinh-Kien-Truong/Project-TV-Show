@@ -8,8 +8,9 @@ function setup() {
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
   episodeList.forEach((episode) => {
-    const episodeElem = document.createElement("div");
+    const episodeElem = document.createElement("article");
     episodeElem.classList.add("episode");
+    episodeElem.setAttribute("tabindex", "0");
 
     const titleElem = document.createElement("h2");
 
@@ -21,6 +22,7 @@ function makePageForEpisodes(episodeList) {
 
     const imgElem = document.createElement("img");
     imgElem.src = episode.image.medium;
+    imgElem.alt = `${episode.name} thumbnail`;
     episodeElem.appendChild(imgElem);
 
     const summaryElem = document.createElement("div");

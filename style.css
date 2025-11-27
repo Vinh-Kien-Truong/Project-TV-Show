@@ -1,4 +1,3 @@
-/* Basic Reset */
 * {
   margin: 0;
   padding: 0;
@@ -8,10 +7,14 @@
 
 body {
   background-color: #f4f4f4;
+  color: #1a1a1a;
   padding: 20px;
 }
+body,
+.episode div {
+  color: #222;
+}
 
-/* Container for episodes */
 #root {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -20,9 +23,9 @@ body {
   justify-items: center;
 }
 
-/* Episode Card Styling */
 .episode {
   background: white;
+  color: #1a1a1a;
   width: 100%;
   max-width: 350px;
   border-radius: 12px;
@@ -33,19 +36,18 @@ body {
   gap: 10px;
 }
 
-/* Title and Episode Code */
 .episode h2 {
   font-size: 1.1rem;
+  color: 1a1a1a;
   font-weight: bold;
   text-align: center;
 }
 .episode h3 {
   text-align: center;
   font-size: 0.9rem;
-  color: #444;
+  color: #444444;
 }
 
-/* Image Styling */
 .episode img {
   width: 100%;
   border-radius: 8px;
@@ -53,14 +55,21 @@ body {
   object-fit: cover;
 }
 
-/* Summary */
 .episode div {
   font-size: 0.85rem;
-  color: #333;
+  color: #1a1a1a;
   text-align: justify;
 }
+.episode:focus {
+  outline: 3px solid #0077cc;
+  outline-offset: 4px;
+}
+episode:focus,
+a:focus {
+  outline: 3px solid #0055aa;
+  outline-offset: 4px;
+}
 
-/* Footer styling */
 footer {
   grid-column: 1 / -1;
   text-align: center;
@@ -70,9 +79,21 @@ footer {
   color: #555;
 }
 footer a {
-  color: #0077cc;
+  color: #0055aa;
   text-decoration: none;
 }
 footer a:hover {
   text-decoration: underline;
+}
+
+a {
+  text-decoration: underline; /* required for accessibility */
+  font-weight: 600; /* optional, adds clarity */
+  color: #0055aa; /* passes contrast AA */
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+  color: #003f88; /* darker on hover = more contrast */
 }
