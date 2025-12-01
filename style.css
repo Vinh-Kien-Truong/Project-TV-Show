@@ -10,6 +10,7 @@ body {
   color: #1a1a1a;
   padding: 20px;
 }
+
 body,
 .episode div {
   color: #222;
@@ -21,6 +22,10 @@ body,
   gap: 20px;
   align-items: stretch;
   justify-items: center;
+}
+
+.main-header {
+  padding: 2rem 0;
 }
 
 .episode {
@@ -42,6 +47,7 @@ body,
   font-weight: bold;
   text-align: center;
 }
+
 .episode h3 {
   text-align: center;
   font-size: 0.9rem;
@@ -60,10 +66,12 @@ body,
   color: #1a1a1a;
   text-align: justify;
 }
+
 .episode:focus {
   outline: 3px solid #0077cc;
   outline-offset: 4px;
 }
+
 episode:focus,
 a:focus {
   outline: 3px solid #0055aa;
@@ -78,22 +86,52 @@ footer {
   font-size: 0.85rem;
   color: #555;
 }
+
 footer a {
   color: #0055aa;
   text-decoration: none;
 }
+
 footer a:hover {
   text-decoration: underline;
 }
 
 a {
-  text-decoration: underline; /* required for accessibility */
-  font-weight: 600; /* optional, adds clarity */
-  color: #0055aa; /* passes contrast AA */
+  text-decoration: underline;
+  /* required for accessibility */
+  font-weight: 600;
+  /* optional, adds clarity */
+  color: #0055aa;
+  /* passes contrast AA */
 }
 
 a:hover,
 a:focus {
   text-decoration: underline;
-  color: #003f88; /* darker on hover = more contrast */
+  color: #003f88;
+  /* darker on hover = more contrast */
+}
+
+/* SEARCH */
+#search-form {
+  min-width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+input[type="text"] {
+  padding: 1rem;
+  border: 1px solid #003f88;
+  border-radius: 0.5rem;
+}
+
+#search-form>input {
+  flex-grow: 1;
+}
+
+#search-results-infos {
+  margin: 1rem 0;
+  padding: 1rem auto;
+  font-weight: bold;
 }

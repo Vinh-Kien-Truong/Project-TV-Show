@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,9 +8,20 @@
     <link href="style.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
-
   <body>
-    <main id="root"></main>
+    <header class="main-header">
+      <form id="search-form">
+        <select name="search-select" id="search-select"></select>
+        <input type="text" name="search-input" id="search-input" placeholder="Type your search query">
+      </form>
+      <div id="search-results-infos">
+<p>search-results-infos</p>
+      </div>
+    </header>
+    <main id="root">
+
+
+    </main>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
@@ -17,4 +29,5 @@
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
   </body>
+
 </html>
