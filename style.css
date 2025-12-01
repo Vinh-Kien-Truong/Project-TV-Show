@@ -97,19 +97,15 @@ footer a:hover {
 }
 
 a {
-  text-decoration: underline;
-  /* required for accessibility */
-  font-weight: 600;
-  /* optional, adds clarity */
-  color: #0055aa;
-  /* passes contrast AA */
+  text-decoration: underline; /* required for accessibility */
+  font-weight: 600; /* optional, adds clarity */
+  color: #0055aa; /* passes contrast AA */
 }
 
 a:hover,
 a:focus {
   text-decoration: underline;
-  color: #003f88;
-  /* darker on hover = more contrast */
+  color: #003f88; /* darker on hover = more contrast */
 }
 
 /* SEARCH */
