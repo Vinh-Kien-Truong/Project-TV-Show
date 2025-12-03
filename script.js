@@ -1,44 +1,96 @@
+import { populateShowSelect, makePageForShows } from "./includes/shows.js";
 // DOM Elements
 const rootElem = document.getElementById("root");
 const searchInput = document.getElementById("search-input");
-const searchSelect = document.getElementById("search-select");
+const showSelect = document.getElementById("shows-select");
+const episodeSelect = document.getElementById("episodes-select");
 const searchResultInfos = document.getElementById("search-results-infos");
 
 let allEpisodes = [];
+let allShows = [];
+/*
+ * During one user's visit to your website
+ * you should never fetch any URL more than once.
+ */
+let seenShows = [];
 let fetchFailed = false;
 
 window.onload = setup;
 
 async function setup() {
-  showLoadingMessage();
-
   try {
-    allEpisodes = await fetchEpisodes();
+    allShows = await fetchData();
+    console.log();
   } catch (err) {
     showErrorMessage("Failed to load episode data. Please try again later.");
     fetchFailed = true;
     return;
   }
-
   clearRoot();
-  makePageForEpisodes(allEpisodes);
-  populateSelect(allEpisodes);
-
-  searchInput.addEventListener("input", handleSearch);
-  searchSelect.addEventListener("change", handleSelect);
+  populateShowSelect(showSelect, allShows);
+  makePageForShows(rootElem, allShows);
+  setListeners();
 }
 
-async function fetchEpisodes() {
-  const url = "https://api.tvmaze.com/shows/82/episodes";
-
+// Show series.
+async function fetchData(str) {
+  const url = str || "https://api.tvmaze.com/shows";
+  showLoadingMessage();
   const response = await fetch(url);
 
   if (!response.ok) {
     throw new Error("Network response was not OK");
   }
+  return await response.json();
+}
 
-  const episodes = await response.json();
-  return episodes;
+function setListeners() {
+  // Shows select.
+  showSelect.addEventListener("change", handleShowSelectChange);
+  // Input text.
+  searchInput.addEventListener("input", handleSearch);
+  // Episodes select.
+  episodeSelect.addEventListener("change", handleEpisodeSelectChange);
+}
+
+// Events handlers.
+async function handleShowSelectChange() {
+  // Empty episodes filters.
+  episodeSelect.selectedIndex = 0;
+  searchInput.value = "";
+  searchResultInfos.textContent = "";
+
+  const id = this.value;
+  // Case of default value.
+  if (isNaN(id)) {
+    clearRoot();
+    makePageForShows(rootElem, allShows);
+    return;
+  }
+
+  /*
+   * During one user's visit to your website
+   * you should never fetch any URL more than once.
+   */
+  if (seenShows.some((item) => item === id)) {
+    showErrorMessage("You already fetched this show");
+
+    return;
+  }
+
+  const url = `https://api.tvmaze.com/shows/${id}/episodes`;
+
+  try {
+    allEpisodes = await fetchData(url);
+  } catch (err) {
+    showErrorMessage("Failed to load episode data. Please try again later.");
+    fetchFailed = true;
+    return;
+  }
+  seenShows.push(id);
+  clearRoot();
+  makePageForEpisodes(allEpisodes);
+  populateEpisodeSelect(allEpisodes);
 }
 
 function showLoadingMessage() {
@@ -89,11 +141,6 @@ function makePageForEpisodes(episodeList) {
 
     rootElem.appendChild(article);
   });
-
-  // Footer
-  const footer = document.createElement("footer");
-  footer.innerHTML = `Data sourced from <a href="https://tvmaze.com/">TVMaze.com</a>`;
-  rootElem.appendChild(footer);
 }
 
 function handleSearch() {
@@ -104,7 +151,7 @@ function handleSearch() {
   if (!query) {
     searchResultInfos.innerHTML = "";
     makePageForEpisodes(allEpisodes);
-    searchSelect.selectedIndex = 0;
+    episodeSelect.selectedIndex = 0;
     return;
   }
 
@@ -121,13 +168,13 @@ function handleSearch() {
       ? `"${query}" found in ${results.length} episode(s)`
       : `No results found for "${query}"`;
 
-  searchSelect.selectedIndex = 0;
+  episodeSelect.selectedIndex = 0;
 }
 
-function handleSelect() {
+function handleEpisodeSelectChange() {
   if (fetchFailed) return;
 
-  const value = searchSelect.value;
+  const value = episodeSelect.value;
 
   if (value === "Select an episode") {
     makePageForEpisodes(allEpisodes);
@@ -145,7 +192,7 @@ function handleSelect() {
   }
 }
 
-function populateSelect(episodes) {
+function populateEpisodeSelect(episodes) {
   let html = `<option>Select an episode</option>`;
 
   episodes.forEach((ep) => {
@@ -156,5 +203,5 @@ function populateSelect(episodes) {
     html += `<option value="${ep.name}">${id} - ${ep.name}</option>`;
   });
 
-  searchSelect.innerHTML = html;
+  episodeSelect.innerHTML = html;
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,24 +8,25 @@
     <link href="style.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
+
   <body>
     <header class="main-header">
       <form id="search-form">
-        <select name="search-select" id="search-select"></select>
-        <input
-          type="text"
-          name="search-input"
-          id="search-input"
-          placeholder="Type your search query"
-        />
+        <select name="shows-select" id="shows-select"></select>
+        <select name="episodes-select" id="episodes-select"></select>
+        <input type="text" name="search-input" id="search-input" placeholder="Type your search query" />
       </form>
       <div id="search-results-infos">
         <p>search-results-infos</p>
       </div>
     </header>
     <main id="root"></main>
+    <footer>
+      <p>Data sourced from <a href="https://tvmaze.com/">TVMaze.com</a></p>
+    </footer>
 
     <!-- Loads YOUR javascript code -->
-    <script src="script.js"></script>
+    <script src="script.js" type="module"></script>
   </body>
+
 </html>
