@@ -28,7 +28,8 @@ body,
   padding: 2rem 0;
 }
 
-.episode {
+.episode,
+.show {
   background: white;
   color: #1a1a1a;
   width: 100%;
@@ -78,6 +79,36 @@ a:focus {
   outline-offset: 4px;
 }
 
+/* SHOW */
+.show-summary {
+  max-height: 12.5ch;
+  overflow-y: hidden;
+
+}
+
+.show-summary p {
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.show-genres {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.btn {
+  all: reset;
+  border: 1px solid #003f88;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: white;
+  color: #003f88;
+}
+
+
 footer {
   grid-column: 1 / -1;
   text-align: center;
@@ -97,15 +128,19 @@ footer a:hover {
 }
 
 a {
-  text-decoration: underline; /* required for accessibility */
-  font-weight: 600; /* optional, adds clarity */
-  color: #0055aa; /* passes contrast AA */
+  text-decoration: underline;
+  /* required for accessibility */
+  font-weight: 600;
+  /* optional, adds clarity */
+  color: #0055aa;
+  /* passes contrast AA */
 }
 
 a:hover,
 a:focus {
   text-decoration: underline;
-  color: #003f88; /* darker on hover = more contrast */
+  color: #003f88;
+  /* darker on hover = more contrast */
 }
 
 /* SEARCH */
@@ -130,4 +165,9 @@ input[type="text"] {
   margin: 1rem 0;
   padding: 1rem auto;
   font-weight: bold;
+}
+
+/* Hide episode select */
+select:empty {
+  display: none;
 }
